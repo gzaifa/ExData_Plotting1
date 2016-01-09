@@ -17,15 +17,25 @@ x <- paste(power_sub$Date, power_sub$Time)
 power_sub$DateTime <- as.POSIXct(x)
 
 # Define output device
-png("plot3.png", width = 480, height = 480)
+png("plot4.png", width = 480, height = 480)
+
+# set up 2 columns and 2 rows
+par(mfrow = c(2,2),mar = c(4,4,2,1))
 
 # Construct
 with(power_sub,
      {
-       plot(DateTime, Sub_metering_1,
-            type="l", 
-            ylab="Energy sub metering",
-            xlab="")
+       plot(DateTime, Global_active_power, 
+            type = "l", 
+            xlab = "" , 
+            ylab = "Global Active Power")
+       
+       plot(DateTime, Voltage , type = "l", xlab = "datetime" , ylab = "Voltage")
+       
+       plot(DateTime, Sub_metering_1, 
+            type = "l", 
+            xlab = "" ,
+            ylab = "Energy sub metering")
        
        lines(DateTime, Sub_metering_2,
              type="l", col="red")
@@ -34,10 +44,15 @@ with(power_sub,
              type="l", col="blue")
 
        legend("topright", 
-              lwd=2,
+              bty="n",
+              lwd="2",
               col=c("black", "red", "blue"), 
               legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-       
+      
+       plot(DateTime, Global_reactive_power, 
+            type = "l", 
+            xlab = "datetime" , 
+            ylab = "Global_reactive_power") 
      }
      
      )

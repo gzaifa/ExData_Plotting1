@@ -12,9 +12,9 @@ power_sub <- subset(power, subset=(Date >= "2007-02-01" & Date<="2007-02-02"))
 
 # Combine Date and Time
 x <- paste(power_sub$Date, power_sub$Time)
-power_sub$DateTime <- as.POSIXct(x)
 
 # Cast to Time
+power_sub$DateTime <- as.POSIXct(x)
 
 # Define output device
 png("plot2.png", width = 480, height = 480)
